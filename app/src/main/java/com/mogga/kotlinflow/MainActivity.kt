@@ -3,6 +3,7 @@ package com.mogga.kotlinflow
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,7 +17,13 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             getData().collect{ data ->
                 Log.d("MainActivity",data.toString())
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@MainActivity,"data is => $data",Toast.LENGTH_LONG).show()
+                }
+
             }
+
+
         }
 
     }
